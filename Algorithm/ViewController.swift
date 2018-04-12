@@ -43,6 +43,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         dataArray.append("排序算法")
         dataArray.append("查询算法")
         dataArray.append("其他经典算法问题")
+        
+        
+        
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
