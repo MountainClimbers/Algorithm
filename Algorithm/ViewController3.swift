@@ -116,13 +116,15 @@ class ViewController3: UIViewController,UITableViewDelegate,UITableViewDataSourc
     }
     
     func InsertionSearch(_ array:[Int],_ searchValue:Int, low:Int,  high:Int) -> Int{
-       if low < high {
-        
-        let searchValue = 1
+ 
+        if low < array.count && high < array.count {
+       
         var mid = low + (searchValue - array[low])
-        let mid2 = (array[high] - array[low]) * (high - low)
+        let mid2 = (array[high] - array[low])
         mid = mid / mid2
-    
+        mid = mid *  (high - low)
+  
+        if low < high {
             if(array[mid]==searchValue){
                 return mid
             }
@@ -133,23 +135,12 @@ class ViewController3: UIViewController,UITableViewDelegate,UITableViewDataSourc
                 return             InsertionSearch(array, searchValue, low: mid+1, high: high)
             }
         }
-        
+            
+        }
         return  -1
+
     }
-    /*
-     //插值查找
-     int InsertionSearch(int a[], int value, int low, int high)
-     {
-     int mid = low+(value-a[low])/(a[high]-a[low])*(high-low);
-     if(a[mid]==value)
-     return mid;
-     if(a[mid]>value)
-     return InsertionSearch(a, value, low, mid-1);
-     if(a[mid]<value)
-     return InsertionSearch(a, value, mid+1, high);
-     }
-     */
-    
+
     /*
      循环二分查找
      */
