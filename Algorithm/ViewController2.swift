@@ -99,10 +99,15 @@ class ViewController2: UIViewController,UITableViewDelegate,UITableViewDataSourc
         switch indexPath.section {
         case 0:  //归并排序
 
-            let items = [62,88,58,47,62,35,73,51,99,37,93]
+//            let items = [62,88,58,47,62,35,73,51,99,37,93]
+//
+//            AlgorithmManange.sharedInstance.mergeSort(items: items)
+//
+            var items = [62,88,58,47,62,35,73,51,99,37,93]
+            print("归并排序前：\(items)")
+            AlgorithmManange.sharedInstance.mergeSort2(&items)
+            print("归并排序后：\(items)")
 
-            AlgorithmManange.sharedInstance.mergeSort(items: items)
-            
             break
         case 1://快速排序
             

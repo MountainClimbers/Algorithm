@@ -106,6 +106,75 @@ class AlgorithmManange: NSObject {
     }
     
     /*
+     归并排序2
+     */
+    func mergeSort2(_ arr: inout [Int]) {
+        var gap = 1;
+        while gap < arr.count {
+            mergePass(&arr, gap: gap);
+            gap *= 2;
+        }
+    }
+    //分解合并序列，gap表示子序列的元素个数
+    private func mergePass(_ arr: inout [Int], gap: Int) {
+        var i = 0;
+        let count = arr.count;
+        
+        while i + 2 * gap - 1 < count {
+            mergeArray2(&arr, low: i, mid: i + gap - 1, high: i + 2 * gap - 1);
+            
+            i += 2 * gap;
+        }
+        
+        //合并剩余的序列
+        if i + gap - 1 < count {
+            mergeArray2(&arr, low: i, mid: i + gap - 1, high: count - 1);
+        }
+    }
+    //合并两个序列
+   private func mergeArray2(_ arr: inout [Int], low: Int, mid: Int, high: Int) {
+        
+        var i = low;
+        var j = mid + 1;
+        var k = 0;
+        
+        var array = Array<Int>(repeating: 0, count: high - low + 1);
+        
+        while i <= mid && j <= high {
+            if arr[i] < arr[j] {
+                array[k] = arr[i];
+                i += 1;
+                k += 1;
+            } else {
+                array[k] = arr[j];
+                j += 1;
+                k += 1;
+            }
+        }
+        
+        while i <= mid {
+            array[k] = arr[i];
+            i += 1;
+            k += 1;
+        }
+        
+        while j <= high {
+            array[k] = arr[j];
+            j += 1;
+            k += 1;
+        }
+        
+        //将排序好的序列复制回原数组
+        k = 0;
+        for i in low...high {
+            arr[i] = array[k];
+            
+            k += 1;
+        }
+    }
+    
+    
+    /*
      快速排序 循环
      */
     func quickSort(_  array: inout [Int] ,left: Int, right:Int){
@@ -121,25 +190,27 @@ class AlgorithmManange: NSObject {
         
         while(i<j){
             /**** 首先从右边j开始查找比基准数小的值 ***/
-//            print("j是从右边往左边比较，找到比key\(key)小的数。把小数往前面抛 当前下标j为\(j),当前数\(array[j])")
+            print("j是从右边往左边比较，找到比key\(key)小的数。把小数往前面抛 当前下标j为\(j),当前数\(array[j])")
             while(i<j && array[j] >= key) {
                 j -= 1
             }
-//            print("当前下标j为：\(j)")
+            print("当前下标j为：\(j)")
 
             //如果比基准数小，则将查找到的小值调换到i的位置
             array[i] = array[j]
+            print("array1:\(array)")
+
             
             /**** 当在zu边查找到一个比基准数小的值时，就从i开始往后找比基准数大的值 ***/
-//            print("i是从左边往右边比较，找到比key\(key)大的数。把大数往后面抛，当前下标i为\(i),当前数\(array[i])")
+            print("i是从左边往右边比较，找到比key\(key)大的数。把大数往后面抛，当前下标i为\(i),当前数\(array[i])")
             while(i<j && array[i] <= key){
                 i += 1
             }
-//            print("当前下标i为：\(i)")
+            print("当前下标i为：\(i)")
 
             //如果比基准数大，则将查找到的大值调换到j的位置
             array[j] = array[i]
-
+            print("array2:\(array)")
         }
         
         //当i==j表示已经把所有比key小的放到它的前面，把所有比key大的放到它的后面。最后将基准数放到正确位置
